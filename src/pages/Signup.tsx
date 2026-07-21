@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -22,18 +21,18 @@ const Signup = () => {
       message.error("Password is required");
     } else if (!confirmPassword || password !== confirmPassword) {
       message.error("Password don't match");
+    } else {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          message.success("Signup successfull");
+          navigate("/");
+        })
+        .catch((error) => {
+          message.error(error.message.replace("Firebase:", ""));
+        });
     }
-
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        message.success("Signup successfull")  
-        navigate("/")      
-      })
-      .catch((error) => {
-        message.error(error.message.replace("Firebase:" , ""))
-      });
   };
 
   return (
@@ -95,7 +94,7 @@ const Signup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full rounded-2xl border-2 border-[#e4e7de] bg-[#fbfbf7] px-3 py-2 text-sm text-[#233821] placeholder-gray-400 transition-all focus:border-[#3FA35E] focus:outline-none focus:ring-4 focus:ring-[#3FA35E]/20"
-                placeholder="abc@example.com"
+                placeholder="Enter your Email"
               />
             </div>
 
@@ -236,7 +235,7 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_18px_-4px_rgba(31,109,59,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-2px_rgba(31,109,59,0.45)] active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3FA35E] focus:ring-offset-2"
+            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_18px_-4px_rgba(31,109,59,0.4)] transition-all duration-200  hover:shadow-[0_10px_22px_-2px_rgba(31,109,59,0.45)] active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3FA35E] focus:ring-offset-2"
           >
             Sign up
           </button>

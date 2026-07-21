@@ -22,6 +22,12 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+          const userData = {
+             email : user.email,
+             uid : user.uid
+          }
+          console.log(userData);
+          
           message.success("Login Sucessfull");
           navigate("/");
         })
@@ -174,7 +180,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_18px_-4px_rgba(31,109,59,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-2px_rgba(31,109,59,0.45)] active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3FA35E] focus:ring-offset-2"
+            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_18px_-4px_rgba(31,109,59,0.4)] transition-all duration-200  hover:shadow-[0_10px_22px_-2px_rgba(31,109,59,0.45)] active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3FA35E] focus:ring-offset-2"
           >
             Log in
           </button>
