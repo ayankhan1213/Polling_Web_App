@@ -1,6 +1,8 @@
 import  Header  from '../pages/Header'
 
 const PollPage = () => {
+
+  
   return (
     <div>
       <Header />

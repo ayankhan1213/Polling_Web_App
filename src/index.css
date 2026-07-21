@@ -16,3 +16,7 @@ button:hover{
 a , button:active{
     transform: scale(.95);
 }
+
+button:disabled{
+    cursor: not-allowed;
+}

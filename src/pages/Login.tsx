@@ -3,7 +3,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import AntdSpinner from "../components/AntdSpinner"
+import { useDispatch, useSelector } from "react-redux";
+import {login} from "../redux/states"
 const Login = () => {
+  
+  const currentUser:any = useSelector((state:any) => state.user)
+  const dispatch = useDispatch()
+  
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -29,7 +35,7 @@ const Login = () => {
             email: user.email,
             uid: user.uid,
           };
-          console.log(userData);
+          dispatch(login(userData))
           setTimeout(() => {
             message.success("Login Sucessfull");
             setLoading(false);
