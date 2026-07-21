@@ -2,11 +2,13 @@ import { message } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import AntdSpinner from "../components/AntdSpinner"
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -18,27 +20,32 @@ const Login = () => {
     } else if (!password) {
       message.error("Password is required");
     } else {
+      setLoading(true);
       const auth = getAuth();
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           const userData = {
-             email : user.email,
-             uid : user.uid
-          }
+            email: user.email,
+            uid: user.uid,
+          };
           console.log(userData);
-          
-          message.success("Login Sucessfull");
-          navigate("/");
+          setTimeout(() => {
+            message.success("Login Sucessfull");
+            setLoading(false);
+            navigate("/");
+          }, 3000);
         })
         .catch((error) => {
+          setLoading(false);
           message.error(
             error.message.replace(
               "Firebase: Error (auth/invalid-credential).",
               "Invalid Email and Password",
             ),
           );
-        });
+        })
+       
     }
   };
 
@@ -180,9 +187,10 @@ const Login = () => {
 
           <button
             type="submit"
-            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_18px_-4px_rgba(31,109,59,0.4)] transition-all duration-200  hover:shadow-[0_10px_22px_-2px_rgba(31,109,59,0.45)] active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#3FA35E] focus:ring-offset-2"
+            disabled={loading}
+            className="group relative flex w-full items-center justify-center rounded-2xl border-none bg-gradient-to-br from-[#3FA35E] to-[#1F6D3B] px-4 py-2.5 text-sm font-extrabold text-white disabled:opacity-70"
           >
-            Log in
+            {loading ? <AntdSpinner /> : "Log in"}
           </button>
         </form>
       </div>
