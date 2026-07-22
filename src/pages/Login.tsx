@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {login} from "../redux/states"
 const Login = () => {
   
-  const currentUser:any = useSelector((state:any) => state.user)
+  const currentUser:any = useSelector((state:any) => state.user)  
   const dispatch = useDispatch()
   
   const navigate = useNavigate();

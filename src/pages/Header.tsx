@@ -19,14 +19,14 @@ const Header = () => {
         },2000)
       })
       .catch((error) => {
-        message.error(error.message)
+        message.error(`Error in Logout`)
       });
   };
   return (
     <div className="flex justify-between p-4 ">
-      <h2 className="text-3xl font-semibold">Polling Web App</h2>
+      <h2 className="text-3xl font-bold">Polling Web App</h2>
       <div className="flex gap-8 items-center">
-        {/* <p>{currentUser.email}</p> */}
+        <p>{currentUser?.email}</p>
         <button
         disabled={click ? true : false}
           onClick={() => {
