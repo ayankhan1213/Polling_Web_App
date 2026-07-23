@@ -3,9 +3,10 @@ import PollPage from "./pages/PollPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useSelector } from "react-redux";
-
 const App = () => {
-
+  const chck = useSelector((state:any)=> state.user)
+  console.log(chck);
+  
   return (
     <div>
       <Routes>

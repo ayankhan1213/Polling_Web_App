@@ -1,12 +1,15 @@
 import { SquareArrowRightExit } from "lucide-react";
 import { getAuth, signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { logout } from "../redux/states";
 const Header = () => {
+
   const [click, setClick] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const currentUser: any = useSelector((state: any) => state.user);
   const handleFunc = () => {
     setClick(true)
@@ -15,18 +18,19 @@ const Header = () => {
       .then(() => {
         setTimeout(()=>{
           message.success("Logout Sucessfull!")
+          dispatch(logout())
           navigate("/login")
-        },2000)
+        },1000)
       })
       .catch((error) => {
         message.error(`Error in Logout`)
       });
   };
   return (
-    <div className="flex justify-between p-4 ">
-      <h2 className="text-3xl font-bold">Polling Web App</h2>
+    <div className="flex flex-col sm:flex-row gap-4  justify-between p-4 items-center">
+      <h2 className="text-2xl sm:text-3xl font-bold">Polling Web App</h2>
       <div className="flex gap-8 items-center">
-        <p>{currentUser?.email}</p>
+        <p className="text-sm">{currentUser?.email}</p>
         <button
         disabled={click ? true : false}
           onClick={() => {
