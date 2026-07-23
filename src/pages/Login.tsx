@@ -35,8 +35,8 @@ const Login = () => {
             email: user.email,
             uid: user.uid,
           };
-          dispatch(login(userData))
           setTimeout(() => {
+            dispatch(login(userData))
             message.success("Login Sucessfull");
             setLoading(false);
             navigate("/");
