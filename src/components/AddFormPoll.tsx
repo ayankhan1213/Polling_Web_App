@@ -219,7 +219,7 @@ const AddFormPoll = () => {
 
       <div className="grid grid-cols-2">
         {data.map((single: any, idx: number) => {
-          return <PollShow key={idx} idx={idx} data={single} />;
+          return <PollShow getPolls={getPolls} key={idx} idx={idx} data={single} />;
         })}
       </div>
     </>

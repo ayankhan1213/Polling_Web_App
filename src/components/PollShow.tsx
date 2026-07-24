@@ -3,10 +3,11 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { message } from "antd";
 import { db } from "../config/firebase";
 
-const PollShow = ({ data, idx }: any) => {
+const PollShow = ({ data, idx , getPolls }: any) => {
 
   const handleDelete = async (id:string) => {
     message.success("Poll Deleted");
+    getPolls()
     try {
       await deleteDoc(doc(db, "polls", id));
     } catch (error) {
