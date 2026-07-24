@@ -32,11 +32,12 @@ const App = () => {
   useEffect(() => {
       getFirebaseUser();
   }, []);
-  return (
-    <>
-    {/* // Loading Animation when Page Refresh */}
-      <div>
-        {loading ? (
+
+
+  {/* // Loading Animation when Page Refresh */}
+  if(loading){
+    return (
+       <div>
           <div className="h-screen flex justify-center items-center">
             <div className="inline-flex" role="status" aria-label="loading">
               <svg
@@ -62,8 +63,12 @@ const App = () => {
               <span className="sr-only">Loading...</span>
             </div>
           </div>
-        ) : null}
       </div>
+    )
+  }
+  return (
+    <>
+     
 
       {/* Routes  */}
       <Routes>

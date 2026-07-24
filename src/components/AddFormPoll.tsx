@@ -48,6 +48,10 @@ const AddFormPoll = () => {
         option_4: option4,
         userEmail: currentUser.email,
         createdAt: new Date().getTime(),
+        optionOne : [],
+        optionTwo : [],
+        optionThree : [],
+        optionFour : [],
       });
       toast.success("Poll Created");
       setOption1("");
@@ -216,7 +220,7 @@ const AddFormPoll = () => {
   </div>
 </div>
 
-      <div className="grid grid-cols-2">
+      <div className="grid sm:grid-cols-2 grid-cols-1">
         {data.map((single: any, idx: number) => {
           return <PollShow getPolls={getPolls} key={idx} idx={idx} data={single} />;
         })}
