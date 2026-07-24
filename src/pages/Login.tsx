@@ -40,7 +40,7 @@ const Login = () => {
             message.success("Login Sucessfull");
             setLoading(false);
             navigate("/");
-          }, 3000);
+          }, 1000);
         })
         .catch((error) => {
           setLoading(false);
