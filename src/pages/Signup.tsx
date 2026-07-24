@@ -29,11 +29,11 @@ const Signup = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          setTimeout(() => {
+          console.log(user);
+  
             message.success("Signup Successful");
             setLoading(false);
             navigate("/");
-          }, 3000);
         })
         .catch((error) => {
           setLoading(false)

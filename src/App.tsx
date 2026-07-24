@@ -1,16 +1,14 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes} from "react-router-dom";
 import PollPage from "./pages/PollPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useDispatch, useSelector } from "react-redux";
-import { Spin } from "antd";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { login } from "./redux/states";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const checkUser = useSelector((state: any) => state.user);
-  console.log(checkUser);
 
   const dispatch = useDispatch();
   const getFirebaseUser = () => {
@@ -21,18 +19,18 @@ const App = () => {
           email: user.email,
           uid: user.uid,
         };
-        setTimeout(()=>{
           dispatch(login(userData));
-          setLoading(false);
-        },1000)
-      } else {
+        } else {
         console.log("User not Logged In");
       }
+      setLoading(false)
     });
+
   };
 
+
   useEffect(() => {
-    getFirebaseUser();
+      getFirebaseUser();
   }, []);
   return (
     <>

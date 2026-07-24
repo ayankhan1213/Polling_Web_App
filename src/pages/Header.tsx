@@ -24,6 +24,7 @@ const Header = () => {
         },1000)
       })
       .catch((error) => {
+        console.log(error)
         message.error(`Error in Logout`)
       });
   };

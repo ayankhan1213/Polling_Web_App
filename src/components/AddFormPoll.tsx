@@ -79,7 +79,6 @@ const AddFormPoll = () => {
     getPolls();
   }, []);
 
-  console.log(data);
 
   return (
     <>

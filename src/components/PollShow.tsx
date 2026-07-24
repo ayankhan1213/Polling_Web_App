@@ -2,9 +2,13 @@ import moment from "moment";
 import { doc, deleteDoc } from "firebase/firestore";
 import { message } from "antd";
 import { db } from "../config/firebase";
+import { useSelector } from "react-redux";
 
 const PollShow = ({ data, idx , getPolls }: any) => {
-
+  const checkUser = useSelector((state: any) => state.user)
+  console.log(data);
+  
+  
   const handleDelete = async (id:string) => {
     message.success("Poll Deleted");
     getPolls()
@@ -67,7 +71,9 @@ const PollShow = ({ data, idx , getPolls }: any) => {
             <span>{moment(data.createdAt).calendar()}</span>
           </div>
 
-          <div className=" flex justify-end pt-5">
+          {checkUser.email == data.userEmail ? 
+        
+            <div className=" flex justify-end pt-5">
             <button
               onClick={()=> {handleDelete(data.id)}}
               className="rounded-xl border border-[#F3C6C6] bg-[#FEF2F2] px-4 py-2 text-sm font-semibold text-[#DC2626] transition-colors hover:bg-[#DC2626] hover:text-white active:scale-[0.98]"
@@ -75,6 +81,8 @@ const PollShow = ({ data, idx , getPolls }: any) => {
               Delete
             </button>
           </div>
+          : null
+        }
         </div>
       </div>
     </>
